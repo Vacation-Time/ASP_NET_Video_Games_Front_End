@@ -5,7 +5,7 @@ const DisplayPlatformStats = ({videoGameData}) => {
 
     function generateDataFormChart() {
 
-        console.log(videoGameData);
+        console.log('All Games Data', videoGameData);
 
         //Filter games by year
         let filteredGames = videoGameData.filter(game => game.year >= 2013); // filters game data by year (2013-present)
@@ -30,9 +30,13 @@ const DisplayPlatformStats = ({videoGameData}) => {
 
             // now we need to loop through allGamesForPlatform and sum each game's global sales
 
-            // Once we have the sum, we can push it to an array value for "10"
+            let totalSalesForPlatform = allGamesForPlatform.reduce((accumulator, currentValue) => accumulator + currentValue.globalSales, 0);
+            console.log('Total Sales for Platform', totalSalesForPlatform); // identifies log in inspect element for easy identification
 
-            return [platform, 10, "silver"]
+
+            // Once we have the sum, we can push it to an array value for "10" which I cahnged to 'totalSalesForPlatform' and it worked!
+
+            return [platform, totalSalesForPlatform, "darkblue"];
         }); // creates array of arrays for each platform
 
         console.log('Platform Arrays', platformArrays); // identifies log in inspect element for easy identification

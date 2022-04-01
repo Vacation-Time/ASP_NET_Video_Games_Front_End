@@ -7,7 +7,7 @@ import DisplayPlatformStats from './Components/GamePlatformStats/GamePlatformSta
 
 function App() {
 
-  const [videoGameData, setVideogameData] = useState([]); // need to link to the database here?
+  const [videoGameData, setVideogameData] = useState([]); 
   const apiLink = "https://localhost:7260/api/games";
 
   useEffect(() => { // gets list of games when form is used
@@ -18,7 +18,7 @@ function App() {
     try{
       // debugger;    
       const response = await axios.get(apiLink);
-      setVideogameData(response.data);
+      setVideogameData(response.data); // where all games data is retrieved I believe...
     } catch(ex){
       console.log(`ERROR in getViderGameData: ${ex}`);
     }
