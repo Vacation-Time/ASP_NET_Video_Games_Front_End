@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import DisplayGames from './Components/DisplayGames/DisplayGames.jsx';
-// import NavBar from './Components/NavBar/NavBar.jsx';
-// import GamesChart from './Components/GamesChart/GamesChart.jsx';
+import NavBar from './Components/NavBar/NavBar.jsx';
 import DisplayPlatformStats from './Components/GamePlatformStats/GamePlatformStats.jsx';
+import DisplayGameInfo from './Components/DisplayGameInfo/DisplayGameInfo.jsx';
+
 
 function App() {
 
@@ -26,12 +26,9 @@ function App() {
 
   return (
     <div className='page-container'>
-      <div>
-        <DisplayPlatformStats videoGameData={videoGameData}/>
-      </div>
-      {/* <div><NavBar/></div>
-      <div><DisplayGames displayGames = {videoGameData} /></div>
-      <div><GamesChart displayGames = {videoGameData} /></div> */}
+      <div><NavBar/></div>
+      <div><DisplayPlatformStats videoGameData={videoGameData}/></div>
+      <div><DisplayGameInfo videoGameData = {videoGameData} /></div>
     </div>
   );
 
