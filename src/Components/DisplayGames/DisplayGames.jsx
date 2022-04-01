@@ -17,7 +17,7 @@ const DisplayGames = (props) => {
                 <input type='text' className='custom-input' placeholder="Happy Hunting =)" onChange={(event) => setSearchTerm(event.target.value)}/>
             </div>
         </div>
-        <table className='game-table table'>
+        <table className='game-table'>
         <thead>
             <tr className = 'header-row'>
             <th>Name</th>
@@ -34,15 +34,7 @@ const DisplayGames = (props) => {
             </tr>
         </thead>
         <tbody>
-            {props.displayGames.filter((game) => {
-                if (searchTerm === ""){
-                    return game;
-                }
-                else if (game.Name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.Publisher.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.Year.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.Rank.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.genre.toLowerCase().includes(searchTerm.toLocaleLowerCase())|| game.Platform.toLowerCase().includes(searchTerm.toLocaleLowerCase())|| game.NorthAmericaSales.toLowerCase().includes(searchTerm.toLocaleLowerCase())|| game.EuropeSales.toLowerCase().includes(searchTerm.toLocaleLowerCase())|| game.JapanSales.toLowerCase().includes(searchTerm.toLocaleLowerCase())|| game.OtherSales.toLowerCase().includes(searchTerm.toLocaleLowerCase())|| game.TotalGlobalSales.toLowerCase().includes(searchTerm.toLocaleLowerCase())) {
-                    return game;
-                }
-            })
-            .map((game, index) => { 
+            {props.map((game, index) => { 
             return (
                 <tr key= {index} className = 'display-rows'>
                     <td>{game.Name}</td>
