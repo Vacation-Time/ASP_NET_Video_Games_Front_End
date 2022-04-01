@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Chart } from "react-google-charts";
 
-const DisplayPlatformStats = (videoGameData) => {
+const DisplayPlatformStats = ({videoGameData}) => {
 
     function generateDataFormChart() {
 
