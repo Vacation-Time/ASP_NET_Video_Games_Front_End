@@ -1,50 +1,62 @@
 import React, { useState } from 'react';
-import './DisplaySong.css';
-import {Button} from 'react-bootstrap';
 
-const DisplaySongs = (props) => {
+const DisplayGameInfo = ({videoGameData}) => {
 
     const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
 
+        
     return (  
     <div className = 'display-container'>
         <div className='table-title'>
             <div className ='list-contain'>
-                <h2 className='list-title'>Songs</h2>
+                <h2 className='list-title'>Games</h2>
             </div>
             <div className = 'search-filter'>
                 <label className='search-label'>Modify List View:</label>
                 <input type='text' className='custom-input' placeholder="Happy Hunting =)" onChange={(event) => setSearchTerm(event.target.value)}/>
             </div>
         </div>
-        <table className='song-table table'>
+        <table className='game-table table'>
         <thead>
             <tr className = 'header-row'>
-                <th>Title</th>
-                <th>Artist</th>
-                <th>Album</th>            
-                <th>Release Date</th>
+                <th>Name</th>
+                <th>Publisher</th>
+                <th>Year</th>            
+                <th>Rank</th>
                 <th>Genre</th>
+                <th>Platform</th>                
+                <th>North America Sales</th>
+                <th>Japan Sales</th>
+                <th>Europe Sales</th>            
+                <th>Other Sales</th>
+                <th>Total Global Sales</th>
             </tr>
         </thead>
+    
         <tbody>
-            {props.displaySongs.filter((song) => {
+            {videoGameData.filter((game) => {
                 if (searchTerm === ""){
-                    return song;
+                    return game;
                 }
-                else if (song.title.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || song.artist.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || song.album.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || song.release_date.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || song.genre.toLowerCase().includes(searchTerm.toLocaleLowerCase())) {
-                    return song;
+                else if (game.name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.publisher.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.year.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.rank.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.genre.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.platform.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.northAmericaSales.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.japanSales.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.europeSales.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.otherSales.toLowerCase().includes(searchTerm.toLocaleLowerCase()) || game.totalGlobalSales.toLowerCase().includes(searchTerm.toLocaleLowerCase())) {
+                    return game;
                 }
             })
-            .map((song, index) => { 
+        }{videoGameData.map((game, index) => { 
             return (
                 <tr key= {index} className = 'display-rows'>
-                    <td>{song.title}</td>
-                    <td>{song.artist}</td>
-                    <td>{song.album}</td>
-                    <td>{song.release_date}</td>
-                    <td>{song.genre}</td>
-                    <td><Button type = 'delete' variant="outline-danger" size="sm" onClick={() => props.deleteSongProp(song)}>Delete</Button></td> 
+                    <td>{game.Name}</td>
+                    <td>{game.Publisher}</td>
+                    <td>{game.Year}</td>
+                    <td>{game.Rank}</td>
+                    <td>{game.Genre}</td>                   
+                    <td>{game.Platform}</td>
+                    <td>{game.NorthAmericaSales}</td>
+                    <td>{game.EuropeSales}</td>
+                    <td>{game.JapanSales}</td>
+                    <td>{game.OtherSales}</td>
+                    <td>{game.TotalGlobalSales}</td>
                 </tr>
             )
             })}
@@ -54,7 +66,7 @@ const DisplaySongs = (props) => {
     );
 }
  
-export default DisplaySongs;
+export default DisplayGameInfo;
 
 //#######################################################
 
@@ -99,3 +111,47 @@ const DisplayGameInfo = ({videoGameData}) => {
 
  
 export default DisplayGameInfo;
+
+// ##############################################################
+
+// 1. Create a state variable to hold the filtered games
+// 2. Create a function that holds your filter logic (take it out of the HTML part)
+// --In this function filter out the games the way you are, but create and set a variable equal to the filter function call (this will hold the new array filter returns)
+// --Set the state variable that you created in step one, equal to this new array
+// 3. Use the state variable in your "map" section that generates the rows of the table
+
+let matchingGames = videoGameData.filter((game) => {      
+    if (game.name.toLowerCase().includes(searchTerm.toLowerCase())) {   // searchTerm from search input 
+    return true      
+    }      
+    else 
+    return false  
+    })  
+    setDisplayGames(matchingGames)  // this is the step where we would save the result in a hook 
+    }
+
+    
+let filteredGames = videoGameData.filter(game => {
+    {videoGameData.filter((game) => {
+        if (searchTerm === ""){
+            return game;
+        }
+        else if (game.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())) {
+            return game;
+        }
+    });
+}
+
+
+
+const fruits = ['apple', 'banana', 'grapes', 'mango', 'orange']
+
+/**
+ * Filter array items based on search criteria (query)
+ */
+const filterItems = (arr, query) => {
+  return arr.filter(el => el.toLowerCase().indexOf(query.toLowerCase()) !== -1)
+}
+
+console.log(filterItems(fruits, 'ap'))  // ['apple', 'grapes']
+console.log(filterItems(fruits, 'an'))  // ['banana', 'mango', 'orange']
